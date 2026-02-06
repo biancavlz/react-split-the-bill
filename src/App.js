@@ -24,6 +24,8 @@ export default function App() {
     <div className="app">
       <div className="sidebar">
         <FriendsList />
+        <FormAddFriend />
+        <Button>Add Friend</Button>
       </div>
     </div>
   );
@@ -32,11 +34,13 @@ export default function App() {
 function FriendsList() {
   const friends = initialFriends;
   return (
-    <ul>
-      {friends.map((friend) => (
-        <Friend friend={friend} key={friend.id} />
-      ))}
-    </ul>
+    <>
+      <ul>
+        {friends.map((friend) => (
+          <Friend friend={friend} key={friend.id} />
+        ))}
+      </ul>
+    </>
   );
 }
 
@@ -58,7 +62,23 @@ function Friend({ friend }) {
       )}
 
       {friend.balance === 0 && <p>You and your {friend.name} are even</p>}
-      <button className="button">Select</button>
+      <Button>Select</Button>
     </li>
   );
+}
+
+function FormAddFriend() {
+  return (
+    <form className="form-add-friend">
+      <label>👫 Friend's name</label>
+      <input type="text"></input>
+      <label>Friend's image URL</label>
+      <input type="text"></input>
+      <Button>Add</Button>
+    </form>
+  );
+}
+
+function Button({ children }) {
+  return <button className="button">{children}</button>;
 }
