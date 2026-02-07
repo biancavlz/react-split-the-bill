@@ -48,7 +48,9 @@ export default function App() {
           {showAddFriend ? "close" : "Add Friend"}
         </Button>
       </div>
-      <div>{selectedFriend && <FormSplitBill />}</div>
+      <div>
+        {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} />}
+      </div>
     </div>
   );
 }
@@ -140,23 +142,23 @@ function Button({ children, onclick }) {
   );
 }
 
-function FormSplitBill() {
+function FormSplitBill({ selectedFriend }) {
   return (
     <form className="form-split-bill">
-      <h2>Split a bill with x</h2>
+      <h2>Split a bill with {selectedFriend.name}</h2>
       <label>💰 Bill value</label>
       <input type="text" />
 
       <label>Your expense</label>
       <input type="text" />
 
-      <label>Friend's expense</label>
+      <label>{selectedFriend.name}'s expense</label>
       <input type="text" disabled />
 
       <label> Who is paying the bill?</label>
       <select>
         <option value="user">You</option>
-        <option value="friend">x</option>
+        <option value="friend">{selectedFriend.name}</option>
       </select>
 
       <Button>Split Bill</Button>
